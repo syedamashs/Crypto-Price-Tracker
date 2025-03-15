@@ -1,5 +1,4 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 5px;
     background-color: #f4f4f4;
 }
@@ -16,4 +15,35 @@ main p{
     font-size: 20px;
     color: rgb(67, 67, 8);
     margin-left: 70px;
+}
+
+section label{
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+    margin-left: 30px;
+}
+
+section input{
+    padding: 5px;
+    margin-left: 10px;
+    width: 200px;
+    text-align:center ;
+}
+
+::placeholder{
+    text-align: center;
+}
+section button{
+    margin-top: 20px;
+    margin-left: 477px;
+    padding: 10px 20px;
+    border-radius: 5px; /* Slightly rounded button */
+    border: none;
+    background-color: #008CBA;
+    color: white;
+    cursor: pointer;
+}
+
+section button:hover {
+    background-color: #005f73;
 }
