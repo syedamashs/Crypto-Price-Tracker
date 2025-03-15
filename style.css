@@ -1,12 +1,19 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 50px;
+    margin: 5px;
     background-color: #f4f4f4;
 }
 
 header {
-    background-color: #333;
-    color: white;
+    background-color:rgb(151, 21, 151);
+    text-align: center;
+    color: rgb(190, 167, 191);
     padding: 20px;
+    border-radius: 20px;
+}
+
+main p{
+    font-size: 20px;
+    color: rgb(67, 67, 8);
+    margin-left: 70px;
 }
