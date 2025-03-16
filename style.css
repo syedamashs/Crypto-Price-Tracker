@@ -8,6 +8,7 @@ header {
     text-align: center;
     color: rgb(190, 167, 191);
     padding: 20px;
+    padding-bottom: 0.1px;
     border-radius: 20px;
 }
 
@@ -63,4 +64,17 @@ main p{
 .price span:hover{
     background-color: #005f73;
     cursor: pointer;
+}
+
+.price{
+    margin-top: 25px;
+    margin-left: 20px;
+}
+
+#search_result{
+    margin-left: 20px;
+}
+
+#text1{
+    margin-left: 120px;
 }

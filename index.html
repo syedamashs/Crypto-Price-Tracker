@@ -9,21 +9,24 @@
 <body>
     <header><center>
         <h1>Crypto Price Tracker</h1>
+        <p>By SYED AMASH S</p>
     </header></center> 
     
     <main>
         <br>
-    <p>Track real-time cryptocurrency prices!</p>
+    <p id="text1">Track real-time cryptocurrency prices!</p>
     </main>
     <br>
     <hr>
     <br>
     <div class="search">
     <label>Search for the cryptocurrency :</label>
-    <input type="text" placeholder="Search For a Crypto Currency"><br><br>
-    <button>Search</button></div>
-    <br><br>
+    <input type="text" placeholder="Search For a Crypto Currency" id="searchInput"><br><br>
+    <button id="searchButton">Search</button>
+    <h3 id="search_result"></h3>
+</div>
     <div class="price">
+        <h3>Trending Cryptos</h3>
     <p>Bitcoin Price: <span id="bitcoin_price">Loading ...</span></p>
     <p>Nodecoin Price: <span id="nodecoin_price">Loading ...</span></p>
     <p>Grass Price: <span id="grass_price">Loading ...</span></p>
