@@ -47,3 +47,20 @@ section button{
 section button:hover {
     background-color: #005f73;
 }
+
+price p{
+    margin-left: 30px;
+    padding: 4px;
+    font-size: large;
+}
+
+price span{
+    background-color: #84bdc9;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+price span:hover{
+    background-color: #005f73;
+    cursor: pointer;
+}
