@@ -1,6 +1,7 @@
 body {
     margin: 5px;
     background-color: #f4f4f4;
+    text-align: center;
 }
 
 header {
@@ -15,13 +16,12 @@ header {
 main p{
     font-size: 20px;
     color: rgb(67, 67, 8);
-    margin-left: 70px;
 }
 
 .search label{
     font-size: 30px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
-    margin-left: 30px;
+
 }
 
 .search input{
@@ -36,7 +36,6 @@ main p{
 }
 .search button{
     margin-top: 20px;
-    margin-left: 477px;
     padding: 10px 20px;
     border-radius: 5px; /* Slightly rounded button */
     border: none;
@@ -49,32 +48,26 @@ main p{
     background-color: #005f73;
 }
 
-.price p{
-    margin-left: 30px;
-    padding: 4px;
-    font-size: large;
+
+.crypto-container {
+    display: grid;
+     grid-template-columns: repeat(3, 1fr); /* Two equal columns */
+    gap: 5px 150px; /* 30px row gap, 100px column gap */
+    width: fit-content; /* Fit content width */
+    margin:auto; /* Centering */
 }
 
-.price span{
+.crypto-container p {
     background-color: #84bdc9;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    width: 220px; /* Fixed width for better alignment */
 }
 
-.price span:hover{
+.crypto-container p:hover {
     background-color: #005f73;
+    color: white;
     cursor: pointer;
-}
-
-.price{
-    margin-top: 25px;
-    margin-left: 20px;
-}
-
-#search_result{
-    margin-left: 20px;
-}
-
-#text1{
-    margin-left: 120px;
 }
