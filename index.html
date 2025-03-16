@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Price Tracker</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
 <body>
     <header><center>
@@ -19,14 +18,17 @@
     <br>
     <hr>
     <br>
-    <section>
+    <div class="search">
     <label>Search for the cryptocurrency :</label>
     <input type="text" placeholder="Search For a Crypto Currency"><br><br>
-    <button>Search</button></section>
+    <button>Search</button></div>
     <br><br>
-    <price>
+    <div class="price">
     <p>Bitcoin Price: <span id="bitcoin_price">Loading ...</span></p>
     <p>Nodecoin Price: <span id="nodecoin_price">Loading ...</span></p>
-</price>
+    <p>Grass Price: <span id="grass_price">Loading ...</span></p>
+    </div>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -17,13 +17,13 @@ main p{
     margin-left: 70px;
 }
 
-section label{
+.search label{
     font-size: 30px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
     margin-left: 30px;
 }
 
-section input{
+.search input{
     padding: 5px;
     margin-left: 10px;
     width: 200px;
@@ -33,7 +33,7 @@ section input{
 ::placeholder{
     text-align: center;
 }
-section button{
+.search button{
     margin-top: 20px;
     margin-left: 477px;
     padding: 10px 20px;
@@ -44,23 +44,23 @@ section button{
     cursor: pointer;
 }
 
-section button:hover {
+.search button:hover {
     background-color: #005f73;
 }
 
-price p{
+.price p{
     margin-left: 30px;
     padding: 4px;
     font-size: large;
 }
 
-price span{
+.price span{
     background-color: #84bdc9;
     padding: 10px;
     border-radius: 10px;
 }
 
-price span:hover{
+.price span:hover{
     background-color: #005f73;
     cursor: pointer;
 }
