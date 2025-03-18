@@ -35,7 +35,8 @@ main p{
     text-align: center;
 }
 .search button{
-    margin-top: 20px;
+    margin-top: -3px;
+    margin-left: 7px;
     padding: 10px 20px;
     border-radius: 5px; /* Slightly rounded button */
     border: none;

@@ -5,23 +5,23 @@ const fetchprice = async () => {
 
         // Store prices in an object for search functionality
         window.cryptoPrices = {
-            btc: data.bitcoin ? data.bitcoin.usd : null,
-            nc: data.nodecoin ? data.nodecoin.usd : null,
-            grass: data.grass ? data.grass.usd : null,
-            eth: data.ethereum ? data.ethereum.usd : null,
-            col: data.solana ? data.solana.usd : null,
-            kda: data.kadena ? data.kadena.usd : null,
-            sui: data.sui ? data.sui.usd : null,
-            ada: data.cardano ? data.cardano.usd : null,
-            apt: data.aptos ? data.aptos.usd : null,
-            ton: data.toncoin ? data.toncoin.usd : null,
-            near: data.near ? data.near.usd : null,
-            trump: data.trumpcoin ? data.trumpcoin.usd : null,
-            doge: data.dogecoin ? data.dogecoin.usd : null,
-            cgpt: data.chaingpt ? data.chaingpt.usd : null,
-            bgb: data['bitget-token'] ? data['bitget-token'].usd : null,
-            pi: data['pi-network'] ? data['pi-network'].usd : null,
-            bnb: data.binancecoin ? data.binancecoin.usd : null
+            btc: data.bitcoin?.usd,
+            nc: data.nodecoin?.usd,
+            grass: data.grass?.usd,
+            eth: data.ethereum?.usd,
+            sol: data.solana?.usd,
+            kda: data.kadena?.usd,
+            sui: data.sui?.usd,
+            ada: data.cardano?.usd,
+            apt: data.aptos?.usd,
+            ton: data.toncoin?.usd,
+            near: data.near?.usd,
+            trump: data.trumpcoin?.usd,
+            doge: data.dogecoin?.usd,
+            cgpt: data.chaingpt?.usd,
+            bgb: data['bitget-token']?.usd,
+            pi: data['pi-network']?.usd,
+            bnb: data.binancecoin?.usd
         };
 
         // Update the price display
@@ -31,12 +31,9 @@ const fetchprice = async () => {
         document.getElementById("eth_price").innerText = data.ethereum ? "$" + data.ethereum.usd : "Cannot fetch Ethereum price!";
         document.getElementById("sol_price").innerText = data.solana ? "$" + data.solana.usd : "Cannot fetch Solana price!";
         document.getElementById("kda_price").innerText = data.kadena ? "$" + data.kadena.usd : "Cannot fetch KDA price!";
-        document.getElementById("bgb_price").innerText = data['bitget-token'] ? "$" + data['bitget-token'].usd : "Cannot fetch BGB price!";
-        document.getElementById("bnb_price").innerText = data.binancecoin ? "$" + data.binancecoin.usd : "Cannot fetch BNB price!";
-        document.getElementById("ada_price").innerText = data.cardano ? "$" + data.cardano.usd : "Cannot fetch ADA price!";
 
-        // Start the blinking effect
-        blinkPrices();
+        // Start the blinking effect (Disabled for now)
+        // blinkPrices();
         
     } catch (error) {
         console.log("Error fetching prices: ", error);
@@ -45,12 +42,12 @@ const fetchprice = async () => {
 
 // Function to handle search button click
 const searchCrypto = () => {
-    let searchInput = document.getElementById("searchInput").value.toLowerCase(); // Convert to lowercase
-    let resultElement = document.getElementById("search_result"); // Result display element
+    let searchInput = document.getElementById("searchInput").value.toLowerCase().trim();
+    let resultElement = document.getElementById("search_result");
 
     if (window.cryptoPrices[searchInput] !== undefined && window.cryptoPrices[searchInput] !== null) {
         resultElement.innerText = `${searchInput.toUpperCase()} Price: $${window.cryptoPrices[searchInput]}`;
-        resultElement.style.color = "green"; // Make it visually appealing
+        resultElement.style.color = "green";
     } else {
         resultElement.innerText = "No results found!";
         resultElement.style.color = "red";
@@ -59,14 +56,13 @@ const searchCrypto = () => {
 
 // Function to clear search input and reset page
 const clearSearch = () => {
-    document.getElementById("searchInput").value = ""; // Clear input field
-    document.getElementById("search_result").innerText = ""; // Clear result
+    document.getElementById("searchInput").value = "";
+    document.getElementById("search_result").innerText = "";
 };
 
-// Function to make the prices blink
+/* Function to make the prices blink (Disabled for now)
 const blinkPrices = () => {
-    const blinkElements = [
-    ];
+    const blinkElements = []; // Add IDs of elements you want to blink
 
     let isVisible = true;
     setInterval(() => {
@@ -78,6 +74,7 @@ const blinkPrices = () => {
         isVisible = !isVisible;
     }, 500); // Blink every 0.5 seconds
 };
+*/
 
 // Add event listener for search button
 document.getElementById("searchButton").addEventListener("click", searchCrypto);
