@@ -17,7 +17,7 @@ const fetchPrice = async () => {
         document.getElementById("refreshButton").classList.add("refreshing");
 
         // Fetch prices for all cryptocurrencies
-        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,solana,nodecoin,grass,cardano,sui,binancecoin,kadena,toncoin,shiba-inu,notcoin,tron,ripple,stellar,avalanche-2,polkadot,uniswap,pepe,floki,matic-network,arbitrum,internet-computer,dogwifcoin,chiliz,the-doge-nft,hamster-kombat,memecoin&vs_currencies=usd&include_24hr_change=true");
+        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,solana,nodecoin,grass,cardano,sui,binancecoin,kadena,the-open-network,shiba-inu,notcoin,tron,ripple,stellar,avalanche-2,polkadot,uniswap,pepe,floki,matic-network,arbitrum,internet-computer,dogwifcoin,chiliz,the-doge-nft,hamster-kombat,memecoin&vs_currencies=usd&include_24hr_change=true");
         let data = await response.json();
 
         console.log("Fetched Data:", data); // Debugging log to check API response
@@ -33,7 +33,7 @@ const fetchPrice = async () => {
             sui: data.sui?.usd,
             ada: data.cardano?.usd,
             apt: data.aptos?.usd,
-            ton: data.toncoin?.usd,
+            ton: data['the-open-network']?.usd, // Correct ID for Toncoin
             near: data.near?.usd,
             trump: data.trumpcoin?.usd,
             doge: data.dogecoin?.usd,
@@ -68,7 +68,7 @@ const fetchPrice = async () => {
         updatePrice("ethereum", data.ethereum);
         updatePrice("solana", data.solana);
         updatePrice("kadena", data.kadena);
-        updatePrice("toncoin", data.toncoin);
+        updatePrice("the-open-network", data['the-open-network']); // Correct ID for Toncoin
         updatePrice("shiba-inu", data['shiba-inu']);
         updatePrice("notcoin", data.notcoin);
         updatePrice("tron", data.tron);
