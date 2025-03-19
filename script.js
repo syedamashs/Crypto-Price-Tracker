@@ -47,6 +47,10 @@ const fetchPrice = async () => {
         updatePrice("bitcoin", data.bitcoin);
         updatePrice("nodecoin", data.nodecoin);
         updatePrice("grass", data.grass);
+        updatePrice("ethereum", data.ethereum);
+        updatePrice("solana", data.solana);
+        updatePrice("kadena", data.kadena);
+        
         if (data.ethereum) updatePrice("ethereum", data.ethereum);
         if (data.solana) updatePrice("solana", data.solana);
         if (data.kadena) updatePrice("kadena", data.kadena);
