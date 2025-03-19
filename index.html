@@ -8,10 +8,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Floating Coins Animation -->
+    <div class="floating-coins">
+        <div class="coin">₿</div>
+        <div class="coin">Ξ</div>
+        <div class="coin">⚡</div>
+        <div class="coin">Ⓝ</div>
+        <div class="coin">🌿</div>
+        <div class="coin">Ⓚ</div>
+    </div>
+
     <header class="text-center py-3 bg-primary text-light">
-        <br>
         <h1>Crypto Price Tracker</h1>
         <p>By SYED AMASH S</p>
+        <!-- Dark/Light Mode Toggle Button -->
+        <button id="themeToggle" class="btn btn-light">🌙 Dark Mode</button>
     </header>
     
     <main class="text-center mt-4">
@@ -24,57 +35,70 @@
             <input type="text" class="form-control d-inline w-25" placeholder="Search For a Crypto Currency" id="searchInput">
             <button id="searchButton" class="btn btn-primary">Search</button>
             <button id="clearButton" class="btn btn-secondary">Clear</button>
+            <!-- Refresh Button -->
+            <button id="refreshButton" class="btn btn-success">🔄 Refresh Prices</button>
             <h3 id="search_result" class="mt-3"></h3>
         </div>
 
         <h3 id="trend">Trending Cryptos 🔥🔥</h3>
         <br>
         <div class="row justify-content-center" id="crypto-container">
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <!-- Crypto Cards -->
             <div class="col-md-4">
-                <div class="card text-center">
+                <div class="card text-center animate-fade-in">
                     <div class="card-body">
                         <h5 class="card-title">Bitcoin</h5>
                         <p id="bitcoin_price" class="card-text">Loading ...</p>
+                        <p id="bitcoin_change" class="card-text text-muted"></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-center">
+                <div class="card text-center animate-fade-in">
                     <div class="card-body">
                         <h5 class="card-title">Ethereum</h5>
                         <p id="eth_price" class="card-text">Loading ...</p>
+                        <p id="eth_change" class="card-text text-muted"></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-center">
+                <div class="card text-center animate-fade-in">
                     <div class="card-body">
                         <h5 class="card-title">Solana</h5>
                         <p id="sol_price" class="card-text">Loading ...</p>
+                        <p id="sol_change" class="card-text text-muted"></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mt-3">
-                <div class="card text-center">
+                <div class="card text-center animate-fade-in">
                     <div class="card-body">
                         <h5 class="card-title">Nodecoin</h5>
                         <p id="nodecoin_price" class="card-text">Loading ...</p>
+                        <p id="nodecoin_change" class="card-text text-muted"></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mt-3">
-                <div class="card text-center">
+                <div class="card text-center animate-fade-in">
                     <div class="card-body">
                         <h5 class="card-title">Grass</h5>
                         <p id="grass_price" class="card-text">Loading ...</p>
+                        <p id="grass_change" class="card-text text-muted"></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mt-3">
-                <div class="card text-center">
+                <div class="card text-center animate-fade-in">
                     <div class="card-body">
                         <h5 class="card-title">Kadena</h5>
                         <p id="kda_price" class="card-text">Loading ...</p>
+                        <p id="kda_change" class="card-text text-muted"></p>
                     </div>
                 </div>
             </div>

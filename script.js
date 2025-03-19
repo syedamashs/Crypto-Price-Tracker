@@ -1,7 +1,26 @@
-const fetchprice = async () => {
+// Dark/Light Mode Toggle
+const themeToggle = document.getElementById("themeToggle");
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    if (document.body.classList.contains("dark-mode")) {
+        themeToggle.innerText = "☀️ Light Mode";
+    } else {
+        themeToggle.innerText = "🌙 Dark Mode";
+    }
+});
+
+// Fetch Crypto Prices
+const fetchPrice = async () => {
     try {
-        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,toncoin,solana,nodecoin,grass,cardano,sui,binancecoin,kadena&vs_currencies=usd");
+        // Show loading spinner
+        document.getElementById("loadingSpinner").style.display = "block";
+        document.getElementById("refreshButton").classList.add("refreshing");
+
+        // Fetch prices for all cryptocurrencies
+        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,solana,nodecoin,grass,cardano,sui,binancecoin,kadena&vs_currencies=usd&include_24hr_change=true");
         let data = await response.json();
+
+        console.log("Fetched Data:", data); // Debugging log to check API response
 
         // Store prices in an object for search functionality
         window.cryptoPrices = {
@@ -24,70 +43,91 @@ const fetchprice = async () => {
             bnb: data.binancecoin?.usd
         };
 
-        // Update the price display
-        document.getElementById("bitcoin_price").innerText = data.bitcoin ? "$" + data.bitcoin.usd : "Cannot fetch Bitcoin price!";
-        document.getElementById("nodecoin_price").innerText = data.nodecoin ? "$" + data.nodecoin.usd : "Cannot fetch NodeCoin price!";
-        document.getElementById("grass_price").innerText = data.grass ? "$" + data.grass.usd : "Cannot fetch Grass price!";
-        document.getElementById("eth_price").innerText = data.ethereum ? "$" + data.ethereum.usd : "Cannot fetch Ethereum price!";
-        document.getElementById("sol_price").innerText = data.solana ? "$" + data.solana.usd : "Cannot fetch Solana price!";
-        document.getElementById("kda_price").innerText = data.kadena ? "$" + data.kadena.usd : "Cannot fetch KDA price!";
+        // Update the price display with 24h change
+        updatePrice("bitcoin", data.bitcoin);
+        updatePrice("nodecoin", data.nodecoin);
+        updatePrice("grass", data.grass);
+        if (data.ethereum) updatePrice("ethereum", data.ethereum);
+        if (data.solana) updatePrice("solana", data.solana);
+        if (data.kadena) updatePrice("kadena", data.kadena);
+        if (data.aptos) updatePrice("aptos", data.aptos);
+        if (data.cardano) updatePrice("cardano", data.cardano);
+        if (data.sui) updatePrice("sui", data.sui);
+        if (data.dogecoin) updatePrice("dogecoin", data.dogecoin);
+        if (data.binancecoin) updatePrice("binancecoin", data.binancecoin);
 
-        // Start the blinking effect (Disabled for now)
-        // blinkPrices();
-        
+        // Hide loading spinner and stop refresh button animation
+        document.getElementById("loadingSpinner").style.display = "none";
+        document.getElementById("refreshButton").classList.remove("refreshing");
     } catch (error) {
         console.log("Error fetching prices: ", error);
+        document.getElementById("loadingSpinner").style.display = "none";
+        document.getElementById("refreshButton").classList.remove("refreshing");
+        alert("Failed to fetch prices. Please try again later.");
     }
 };
 
-// Function to handle search button click
+// Update Price and 24h Change
+const updatePrice = (crypto, data) => {
+    let priceElement = document.getElementById(`${crypto}_price`);
+    let changeElement = document.getElementById(`${crypto}_change`);
+
+    if (data) {
+        priceElement.innerText = `$${data.usd}`;
+        if (data.usd_24h_change !== undefined) {
+            changeElement.innerText = `24h Change: ${data.usd_24h_change.toFixed(2)}%`;
+            changeElement.className = data.usd_24h_change >= 0 ? "price-up" : "price-down";
+        } else {
+            changeElement.innerText = "";
+        }
+    } else {
+        priceElement.innerText = "Failed to fetch price!";
+        changeElement.innerText = "";
+    }
+};
+
+// Search Functionality (Now works for full names & symbols)
 const searchCrypto = () => {
     let searchInput = document.getElementById("searchInput").value.toLowerCase().trim();
     let resultElement = document.getElementById("search_result");
 
-    if (window.cryptoPrices[searchInput] !== undefined && window.cryptoPrices[searchInput] !== null) {
-        resultElement.innerText = `${searchInput.toUpperCase()} Price: $${window.cryptoPrices[searchInput]}`;
-        resultElement.style.color = "green";
-    } else {
+    if (!searchInput) {
+        resultElement.innerText = "Please enter a cryptocurrency!";
+        resultElement.style.color = "red";
+        return;
+    }
+
+    let found = false;
+    for (const [key, value] of Object.entries(window.cryptoPrices)) {
+        if (key.includes(searchInput)) {
+            resultElement.innerText = `${key.toUpperCase()} Price: $${value}`;
+            resultElement.style.color = "green";
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
         resultElement.innerText = "No results found!";
         resultElement.style.color = "red";
     }
 };
 
-// Function to clear search input and reset page
+// Clear Search
 const clearSearch = () => {
     document.getElementById("searchInput").value = "";
     document.getElementById("search_result").innerText = "";
 };
 
-/* Function to make the prices blink (Disabled for now)
-const blinkPrices = () => {
-    const blinkElements = []; // Add IDs of elements you want to blink
-
-    let isVisible = true;
-    setInterval(() => {
-        blinkElements.forEach(el => {
-            if (el) {
-                el.style.visibility = isVisible ? "hidden" : "visible";
-            }
-        });
-        isVisible = !isVisible;
-    }, 500); // Blink every 0.5 seconds
-};
-*/
-
-// Add event listener for search button
+// Event Listeners
 document.getElementById("searchButton").addEventListener("click", searchCrypto);
-
-// Add event listener for Enter key press in search input
 document.getElementById("searchInput").addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         searchCrypto();
     }
 });
-
-// Add event listener for Clear button
 document.getElementById("clearButton").addEventListener("click", clearSearch);
+document.getElementById("refreshButton").addEventListener("click", fetchPrice);
 
 // Fetch prices initially
-setTimeout(fetchprice, 2000);
+setTimeout(fetchPrice, 2000);

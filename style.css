@@ -1,61 +1,108 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 body {
     margin: 5px;
     background-color: #f4f4f4;
     text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    overflow: auto; /* Enable scrollbar */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
 }
 
 header {
-    background-color:rgb(151, 21, 151);
+    background-color: rgb(151, 21, 151);
     text-align: center;
     color: rgb(190, 167, 191);
     padding: 20px;
-    padding-bottom: 0.1px;
     border-radius: 20px;
 }
 
-main p{
+main p {
     font-size: 20px;
     color: rgb(67, 67, 8);
 }
 
-.search label{
-    font-size: 30px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
-
+/* Dark Mode Text Color */
+body.dark-mode main p {
+    color: #ffffff;
 }
 
-.search input{
+.search label {
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+}
+
+.search input {
     padding: 5px;
     margin-left: 10px;
     width: 200px;
-    text-align:center ;
-}
-
-::placeholder{
     text-align: center;
 }
-.search button{
+
+::placeholder {
+    text-align: center;
+}
+
+.search button {
     margin-top: -3px;
     margin-left: 7px;
     padding: 10px 20px;
-    border-radius: 5px; /* Slightly rounded button */
+    border-radius: 5px;
     border: none;
     background-color: #008CBA;
     color: white;
     cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
 }
 
 .search button:hover {
     background-color: #005f73;
+    transform: scale(1.05);
 }
 
+/* Refresh Button */
+#refreshButton {
+    margin-left: 10px;
+    transition: transform 0.5s;
+}
+
+#refreshButton.refreshing {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 .crypto-container {
     display: grid;
-     grid-template-columns: repeat(3, 1fr); /* Two equal columns */
-    gap: 5px 150px; /* 30px row gap, 100px column gap */
-    width: fit-content; /* Fit content width */
-    margin:auto; /* Centering */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px 150px;
+    width: fit-content;
+    margin: auto;
 }
 
 .crypto-container p {
@@ -64,7 +111,8 @@ main p{
     border-radius: 10px;
     font-size: 18px;
     text-align: center;
-    width: 220px; /* Fixed width for better alignment */
+    width: 220px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .crypto-container p:hover {
@@ -73,15 +121,76 @@ main p{
     cursor: pointer;
 }
 
-
 .card {
     width: 250px;
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+/* Dark Mode Card Styles */
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #ffffff;
 }
 
 .card:hover {
     transform: scale(1.05);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* Fade-in Animation */
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+#loadingSpinner {
+    margin: 20px auto;
+}
+
+/* Price Change Indicators */
+.price-up {
+    color: green;
+}
+
+.price-down {
+    color: red;
+}
+
+/* Floating Coins Animation */
+.floating-coins {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.coin {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 10s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-50vh) translateX(50vw); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+.coin:nth-child(1) { top: 10%; left: 5%; animation-duration: 12s; }
+.coin:nth-child(2) { top: 20%; left: 80%; animation-duration: 15s; }
+.coin:nth-child(3) { top: 50%; left: 30%; animation-duration: 10s; }
+.coin:nth-child(4) { top: 70%; left: 60%; animation-duration: 14s; }
+.coin:nth-child(5) { top: 40%; left: 10%; animation-duration: 13s; }
+.coin:nth-child(6) { top: 80%; left: 90%; animation-duration: 11s; }
