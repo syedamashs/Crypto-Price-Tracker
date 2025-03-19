@@ -17,7 +17,7 @@ const fetchPrice = async () => {
         document.getElementById("refreshButton").classList.add("refreshing");
 
         // Fetch prices for all cryptocurrencies
-        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,solana,nodecoin,grass,cardano,sui,binancecoin,kadena,the-open-network,shiba-inu,notcoin,tron,ripple,stellar,avalanche-2,polkadot,uniswap,pepe,floki,matic-network,arbitrum,internet-computer,dogwifcoin,chiliz,the-doge-nft,hamster-kombat,memecoin&vs_currencies=usd&include_24hr_change=true");
+        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,solana,nodecoin,grass,cardano,sui,binancecoin,kadena,the-open-network,shiba-inu,notcoin,tron,ripple,stellar,avalanche-2,polkadot,uniswap,pepe,floki,matic-network,arbitrum,internet-computer,dogwifcoin,chiliz,the-doge-nft,hamster-kombat,memecoin,trump-truth-social,eliza,avalon-coin,silencio,story,fuel,tapswap,sei,tomarket,goats,major,alt,degen&vs_currencies=usd&include_24hr_change=true");
         let data = await response.json();
 
         console.log("Fetched Data:", data); // Debugging log to check API response
@@ -58,7 +58,20 @@ const fetchPrice = async () => {
             chz: data.chiliz?.usd,
             dogs: data['the-doge-nft']?.usd,
             hmstr: data['hamster-kombat']?.usd,
-            memefi: data.memecoin?.usd
+            memefi: data.memecoin?.usd,
+            trump2: data['trump-truth-social']?.usd, // Latest Trump coin
+            eliza: data.eliza?.usd, // Eliza coin
+            avl: data['avalon-coin']?.usd, // Avalon Coin
+            slc: data.silencio?.usd, // Silencio Coin
+            ip: data.story?.usd, // Story Coin
+            fuel: data.fuel?.usd, // Fuel Coin
+            taps: data.tapswap?.usd, // Tapswap Coin
+            sei: data.sei?.usd, // SEI Coin
+            toma: data.tomarket?.usd, // Tomarket Coin
+            goats: data.goats?.usd, // Goats Coin
+            major: data.major?.usd, // Major Coin
+            alt: data.alt?.usd, // ALT Coin
+            degen: data.degen?.usd // DEGEN Coin
         };
 
         // Update the price display with 24h change
@@ -87,6 +100,19 @@ const fetchPrice = async () => {
         updatePrice("the-doge-nft", data['the-doge-nft']);
         updatePrice("hamster-kombat", data['hamster-kombat']);
         updatePrice("memecoin", data.memecoin);
+        updatePrice("trump-truth-social", data['trump-truth-social']); // Latest Trump coin
+        updatePrice("eliza", data.eliza); // Eliza coin
+        updatePrice("avalon-coin", data['avalon-coin']); // Avalon Coin
+        updatePrice("silencio", data.silencio); // Silencio Coin
+        updatePrice("story", data.story); // Story Coin
+        updatePrice("fuel", data.fuel); // Fuel Coin
+        updatePrice("tapswap", data.tapswap); // Tapswap Coin
+        updatePrice("sei", data.sei); // SEI Coin
+        updatePrice("tomarket", data.tomarket); // Tomarket Coin
+        updatePrice("goats", data.goats); // Goats Coin
+        updatePrice("major", data.major); // Major Coin
+        updatePrice("alt", data.alt); // ALT Coin
+        updatePrice("degen", data.degen); // DEGEN Coin
 
         // Hide loading spinner and stop refresh button animation
         document.getElementById("loadingSpinner").style.display = "none";
@@ -117,7 +143,7 @@ const updatePrice = (crypto, data) => {
     }
 };
 
-// Search Functionality (Now works for full names & symbols)
+// Search Functionality (Now checks for full word matches)
 const searchCrypto = () => {
     let searchInput = document.getElementById("searchInput").value.toLowerCase().trim();
     let resultElement = document.getElementById("search_result");
@@ -130,7 +156,7 @@ const searchCrypto = () => {
 
     let found = false;
     for (const [key, value] of Object.entries(window.cryptoPrices)) {
-        if (key.includes(searchInput)) {
+        if (key.toLowerCase() === searchInput.toLowerCase()) { // Full word match
             resultElement.innerText = `${key.toUpperCase()} Price: $${value}`;
             resultElement.style.color = "green";
             found = true;
