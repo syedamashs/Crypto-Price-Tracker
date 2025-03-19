@@ -11,6 +11,7 @@ themeToggle.addEventListener("click", () => {
 
 // Fetch Crypto Prices
 const fetchPrice = async () => {
+    try {
         // Show loading spinner
         document.getElementById("loadingSpinner").style.display = "block";
         document.getElementById("refreshButton").classList.add("refreshing");
@@ -49,20 +50,20 @@ const fetchPrice = async () => {
         updatePrice("ethereum", data.ethereum);
         updatePrice("solana", data.solana);
         updatePrice("kadena", data.kadena);
-        
+        updatePrice("aptos", data.aptos);
+        updatePrice("cardano", data.cardano);
+        updatePrice("sui", data.sui);
+        updatePrice("dogecoin", data.dogecoin);
+        updatePrice("binancecoin", data.binancecoin);
 
-        if (data.ethereum) updatePrice("ethereum", data.ethereum);
-        if (data.solana) updatePrice("solana", data.solana);
-        if (data.kadena) updatePrice("kadena", data.kadena);
-        if (data.aptos) updatePrice("aptos", data.aptos);
-        if (data.cardano) updatePrice("cardano", data.cardano);
-        if (data.sui) updatePrice("sui", data.sui);
-        if (data.dogecoin) updatePrice("dogecoin", data.dogecoin);
-        if (data.binancecoin) updatePrice("binancecoin", data.binancecoin);
-        
         // Hide loading spinner and stop refresh button animation
         document.getElementById("loadingSpinner").style.display = "none";
         document.getElementById("refreshButton").classList.remove("refreshing");
+    } catch (error) {
+        console.log("Error fetching prices: ", error);
+        document.getElementById("loadingSpinner").style.display = "none";
+        document.getElementById("refreshButton").classList.remove("refreshing");
+    }
 };
 
 // Update Price and 24h Change
@@ -70,7 +71,7 @@ const updatePrice = (crypto, data) => {
     let priceElement = document.getElementById(`${crypto}_price`);
     let changeElement = document.getElementById(`${crypto}_change`);
 
-    if (data) {
+    if (data && priceElement && changeElement) {
         priceElement.innerText = `$${data.usd}`;
         if (data.usd_24h_change !== undefined) {
             changeElement.innerText = `24h Change: ${data.usd_24h_change.toFixed(2)}%`;
@@ -78,7 +79,7 @@ const updatePrice = (crypto, data) => {
         } else {
             changeElement.innerText = "";
         }
-    } else {
+    } else if (priceElement && changeElement) {
         priceElement.innerText = "Failed to fetch price!";
         changeElement.innerText = "";
     }
