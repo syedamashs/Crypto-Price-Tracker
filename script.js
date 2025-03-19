@@ -11,7 +11,6 @@ themeToggle.addEventListener("click", () => {
 
 // Fetch Crypto Prices
 const fetchPrice = async () => {
-    try {
         // Show loading spinner
         document.getElementById("loadingSpinner").style.display = "block";
         document.getElementById("refreshButton").classList.add("refreshing");
@@ -64,11 +63,6 @@ const fetchPrice = async () => {
         // Hide loading spinner and stop refresh button animation
         document.getElementById("loadingSpinner").style.display = "none";
         document.getElementById("refreshButton").classList.remove("refreshing");
-    } catch (error) {
-        console.log("Error fetching prices: ", error);
-        document.getElementById("loadingSpinner").style.display = "none";
-        document.getElementById("refreshButton").classList.remove("refreshing");
-    }
 };
 
 // Update Price and 24h Change
