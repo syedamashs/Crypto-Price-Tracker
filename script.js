@@ -51,14 +51,7 @@ const fetchPrice = async () => {
         updatePrice("solana", data.solana);
         updatePrice("kadena", data.kadena);
         
-        if (data.ethereum) updatePrice("ethereum", data.ethereum);
-        if (data.solana) updatePrice("solana", data.solana);
-        if (data.kadena) updatePrice("kadena", data.kadena);
-        if (data.aptos) updatePrice("aptos", data.aptos);
-        if (data.cardano) updatePrice("cardano", data.cardano);
-        if (data.sui) updatePrice("sui", data.sui);
-        if (data.dogecoin) updatePrice("dogecoin", data.dogecoin);
-        if (data.binancecoin) updatePrice("binancecoin", data.binancecoin);
+
 
         // Hide loading spinner and stop refresh button animation
         document.getElementById("loadingSpinner").style.display = "none";
