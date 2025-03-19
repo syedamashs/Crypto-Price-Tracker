@@ -17,7 +17,7 @@ const fetchPrice = async () => {
         document.getElementById("refreshButton").classList.add("refreshing");
 
         // Fetch prices for all cryptocurrencies
-        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,solana,nodecoin,grass,cardano,sui,binancecoin,kadena&vs_currencies=usd&include_24hr_change=true");
+        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,solana,nodecoin,grass,cardano,sui,binancecoin,kadena,toncoin,shiba-inu,notcoin,tron,ripple,stellar,avalanche-2,polkadot,uniswap,pepe,floki,matic-network,arbitrum,internet-computer,dogwifcoin,chiliz,the-doge-nft,hamster-kombat,memecoin&vs_currencies=usd&include_24hr_change=true");
         let data = await response.json();
 
         console.log("Fetched Data:", data); // Debugging log to check API response
@@ -40,7 +40,25 @@ const fetchPrice = async () => {
             cgpt: data.chaingpt?.usd,
             bgb: data['bitget-token']?.usd,
             pi: data['pi-network']?.usd,
-            bnb: data.binancecoin?.usd
+            bnb: data.binancecoin?.usd,
+            shib: data['shiba-inu']?.usd,
+            not: data.notcoin?.usd,
+            trx: data.tron?.usd,
+            xrp: data.ripple?.usd,
+            xlm: data.stellar?.usd,
+            avax: data['avalanche-2']?.usd,
+            dot: data.polkadot?.usd,
+            uni: data.uniswap?.usd,
+            pepe: data.pepe?.usd,
+            floki: data.floki?.usd,
+            matic: data['matic-network']?.usd,
+            arb: data.arbitrum?.usd,
+            icp: data['internet-computer']?.usd,
+            wif: data.dogwifcoin?.usd,
+            chz: data.chiliz?.usd,
+            dogs: data['the-doge-nft']?.usd,
+            hmstr: data['hamster-kombat']?.usd,
+            memefi: data.memecoin?.usd
         };
 
         // Update the price display with 24h change
@@ -50,11 +68,25 @@ const fetchPrice = async () => {
         updatePrice("ethereum", data.ethereum);
         updatePrice("solana", data.solana);
         updatePrice("kadena", data.kadena);
-        updatePrice("aptos", data.aptos);
-        updatePrice("cardano", data.cardano);
-        updatePrice("sui", data.sui);
-        updatePrice("dogecoin", data.dogecoin);
-        updatePrice("binancecoin", data.binancecoin);
+        updatePrice("toncoin", data.toncoin);
+        updatePrice("shiba-inu", data['shiba-inu']);
+        updatePrice("notcoin", data.notcoin);
+        updatePrice("tron", data.tron);
+        updatePrice("ripple", data.ripple);
+        updatePrice("stellar", data.stellar);
+        updatePrice("avalanche-2", data['avalanche-2']);
+        updatePrice("polkadot", data.polkadot);
+        updatePrice("uniswap", data.uniswap);
+        updatePrice("pepe", data.pepe);
+        updatePrice("floki", data.floki);
+        updatePrice("matic-network", data['matic-network']);
+        updatePrice("arbitrum", data.arbitrum);
+        updatePrice("internet-computer", data['internet-computer']);
+        updatePrice("dogwifcoin", data.dogwifcoin);
+        updatePrice("chiliz", data.chiliz);
+        updatePrice("the-doge-nft", data['the-doge-nft']);
+        updatePrice("hamster-kombat", data['hamster-kombat']);
+        updatePrice("memecoin", data.memecoin);
 
         // Hide loading spinner and stop refresh button animation
         document.getElementById("loadingSpinner").style.display = "none";
