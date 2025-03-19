@@ -17,7 +17,7 @@ const fetchPrice = async () => {
         document.getElementById("refreshButton").classList.add("refreshing");
 
         // Fetch prices for all cryptocurrencies
-        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,chaingpt,pi-network,ethereum,solana,nodecoin,grass,cardano,sui,binancecoin,kadena,the-open-network,shiba-inu,notcoin,tron,ripple,stellar,avalanche-2,polkadot,uniswap,pepe,floki,matic-network,arbitrum,internet-computer,dogwifcoin,chiliz,the-doge-nft,hamster-kombat,memecoin&vs_currencies=usd&include_24hr_change=true");
+        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,aptos,dogecoin,bitget-token,near,trumpcoin,eliza-coin,avalon-coin,silencio-coin,story-coin,fuel-coin,tapswap,seicoin,tomarket-coin,goats-coin,major-coin,altcoin,degen-coin&vs_currencies=usd&include_24hr_change=true");
         let data = await response.json();
 
         console.log("Fetched Data:", data); // Debugging log to check API response
@@ -25,68 +25,52 @@ const fetchPrice = async () => {
         // Store prices in an object for search functionality
         window.cryptoPrices = {
             btc: data.bitcoin?.usd,
-            nc: data.nodecoin?.usd,
-            grass: data.grass?.usd,
             eth: data.ethereum?.usd,
             sol: data.solana?.usd,
             kda: data.kadena?.usd,
             sui: data.sui?.usd,
             ada: data.cardano?.usd,
             apt: data.aptos?.usd,
-            ton: data['the-open-network']?.usd, // Correct ID for Toncoin
             near: data.near?.usd,
-            trump: data.trumpcoin?.usd,
             doge: data.dogecoin?.usd,
-            cgpt: data.chaingpt?.usd,
-            bgb: data['bitget-token']?.usd,
-            pi: data['pi-network']?.usd,
-            bnb: data.binancecoin?.usd,
-            shib: data['shiba-inu']?.usd,
-            not: data.notcoin?.usd,
-            trx: data.tron?.usd,
-            xrp: data.ripple?.usd,
-            xlm: data.stellar?.usd,
-            avax: data['avalanche-2']?.usd,
-            dot: data.polkadot?.usd,
-            uni: data.uniswap?.usd,
-            pepe: data.pepe?.usd,
-            floki: data.floki?.usd,
-            matic: data['matic-network']?.usd,
-            arb: data.arbitrum?.usd,
-            icp: data['internet-computer']?.usd,
-            wif: data.dogwifcoin?.usd,
-            chz: data.chiliz?.usd,
-            dogs: data['the-doge-nft']?.usd,
-            hmstr: data['hamster-kombat']?.usd,
-            memefi: data.memecoin?.usd
+            trump: data.trumpcoin?.usd,
+            eliza: data['eliza-coin']?.usd,
+            avalon: data['avalon-coin']?.usd,
+            silencio: data['silencio-coin']?.usd,
+            story: data['story-coin']?.usd,
+            fuel: data['fuel-coin']?.usd,
+            taps: data['tapswap']?.usd,
+            sei: data['seicoin']?.usd,
+            toma: data['tomarket-coin']?.usd,
+            goats: data['goats-coin']?.usd,
+            major: data['major-coin']?.usd,
+            alt: data['altcoin']?.usd,
+            degen: data['degen-coin']?.usd
         };
 
         // Update the price display with 24h change
         updatePrice("bitcoin", data.bitcoin);
-        updatePrice("nodecoin", data.nodecoin);
-        updatePrice("grass", data.grass);
         updatePrice("ethereum", data.ethereum);
         updatePrice("solana", data.solana);
         updatePrice("kadena", data.kadena);
-        updatePrice("the-open-network", data['the-open-network']); // Correct ID for Toncoin
-        updatePrice("shiba-inu", data['shiba-inu']);
-        updatePrice("notcoin", data.notcoin);
-        updatePrice("tron", data.tron);
-        updatePrice("ripple", data.ripple);
-        updatePrice("stellar", data.stellar);
-        updatePrice("avalanche-2", data['avalanche-2']);
-        updatePrice("polkadot", data.polkadot);
-        updatePrice("uniswap", data.uniswap);
-        updatePrice("pepe", data.pepe);
-        updatePrice("floki", data.floki);
-        updatePrice("matic-network", data['matic-network']);
-        updatePrice("arbitrum", data.arbitrum);
-        updatePrice("internet-computer", data['internet-computer']);
-        updatePrice("dogwifcoin", data.dogwifcoin);
-        updatePrice("chiliz", data.chiliz);
-        updatePrice("the-doge-nft", data['the-doge-nft']);
-        updatePrice("hamster-kombat", data['hamster-kombat']);
-        updatePrice("memecoin", data.memecoin);
+        updatePrice("sui", data.sui);
+        updatePrice("cardano", data.cardano);
+        updatePrice("aptos", data.aptos);
+        updatePrice("near", data.near);
+        updatePrice("dogecoin", data.dogecoin);
+        updatePrice("trumpcoin", data.trumpcoin);
+        updatePrice("eliza-coin", data['eliza-coin']);
+        updatePrice("avalon-coin", data['avalon-coin']);
+        updatePrice("silencio-coin", data['silencio-coin']);
+        updatePrice("story-coin", data['story-coin']);
+        updatePrice("fuel-coin", data['fuel-coin']);
+        updatePrice("tapswap", data['tapswap']);
+        updatePrice("seicoin", data['seicoin']);
+        updatePrice("tomarket-coin", data['tomarket-coin']);
+        updatePrice("goats-coin", data['goats-coin']);
+        updatePrice("major-coin", data['major-coin']);
+        updatePrice("altcoin", data['altcoin']);
+        updatePrice("degen-coin", data['degen-coin']);
 
         // Hide loading spinner and stop refresh button animation
         document.getElementById("loadingSpinner").style.display = "none";
@@ -117,7 +101,7 @@ const updatePrice = (crypto, data) => {
     }
 };
 
-// Search Functionality (Now works for full names & symbols)
+// Full Word Search Functionality
 const searchCrypto = () => {
     let searchInput = document.getElementById("searchInput").value.toLowerCase().trim();
     let resultElement = document.getElementById("search_result");
@@ -130,7 +114,8 @@ const searchCrypto = () => {
 
     let found = false;
     for (const [key, value] of Object.entries(window.cryptoPrices)) {
-        if (key.includes(searchInput)) {
+        // Full word match check, using regex to match whole word
+        if (new RegExp(`^${searchInput}$`, 'i').test(key)) {
             resultElement.innerText = `${key.toUpperCase()} Price: $${value}`;
             resultElement.style.color = "green";
             found = true;
