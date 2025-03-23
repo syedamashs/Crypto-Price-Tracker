@@ -48,7 +48,6 @@ body.dark-mode main p {
 }
 
 .search button {
-    padding: 10px 20px;
     cursor: pointer;
     transition: transform 0.2s, background-color 0.3s;
 }
@@ -59,7 +58,6 @@ body.dark-mode main p {
 
 /* Refresh Button */
 #refreshButton {
-    margin-left: 10px;
     transition: transform 0.5s;
 }
 
