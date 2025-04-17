@@ -1,142 +1,134 @@
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
 body {
-    margin: 5px;
-    background-color: #f4f4f4;
-    transition: background-color 0.3s, color 0.3s;
-    overflow: auto; /* Enable scrollbar */
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f0f0;
+  color: #111;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Dark Mode Styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
+.dark-mode {
+  background-color: #121212;
+  color: #f9f9f9;
 }
 
-header {
-    border-radius: 20px;
+.header {
+  text-align: center;
+  padding: 1rem;
+  background: inherit;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* Dark Mode Text Color */
-body.dark-mode main p {
-    color: #ffffff;
+#typewriter {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-.search input {
-    text-align: center;
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-::placeholder {
-    text-align: center;
+input, button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
 }
 
-.search button {
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.3s;
+#searchInput {
+  width: 200px;
 }
 
-.search button:hover {
-    transform: scale(1.05);
+button:hover {
+  cursor: pointer;
+  opacity: 0.85;
 }
 
-/* Refresh Button */
-#refreshButton {
-    transition: transform 0.5s;
-}
-
-#refreshButton.refreshing {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.crypto-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1.5rem;
 }
 
 .card {
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.3s;
+  width: 200px;
+  height: 260px;
+  perspective: 1000px;
+  transition: transform 0.5s ease;
+  animation: fadeInUp 0.6s ease-in-out;
 }
 
-/* Dark Mode Card Styles */
-body.dark-mode .card {
-    background-color: #1e1e1e;
-    color: #ffffff;
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+.card:hover .card-inner {
+  transform: rotateY(180deg);
 }
 
-/* Fade-in Animation */
-.animate-fade-in {
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  backface-visibility: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-front {
+  background-color: #ffffff;
+}
+
+.card-back {
+  background-color: #f0f0f0;
+  transform: rotateY(180deg);
+}
+
+.dark-mode .card-front, .dark-mode .card-back {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.spinner {
+  display: none;
+  margin: 2rem auto;
+  border: 6px solid #ccc;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes fadeInUp {
+  from {
     opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
-
-#loadingSpinner {
-    margin: 20px auto;
-}
-
-/* Price Change Indicators */
-.price-up {
-    color: green;
-}
-
-.price-down {
-    color: red;
-}
-
-/* Floating Coins Animation */
-.floating-coins {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-}
-
-.coin {
-    position: absolute;
-    font-size: 2rem;
-    animation: float 10s infinite ease-in-out;
-}
-
-@keyframes float {
-    0% { transform: translateY(0) translateX(0); }
-    50% { transform: translateY(-50vh) translateX(50vw); }
-    100% { transform: translateY(0) translateX(0); }
-}
-
-.coin:nth-child(1) { top: 10%; left: 5%; animation-duration: 12s; }
-.coin:nth-child(2) { top: 20%; left: 80%; animation-duration: 15s; }
-.coin:nth-child(3) { top: 50%; left: 30%; animation-duration: 10s; }
-.coin:nth-child(4) { top: 70%; left: 60%; animation-duration: 14s; }
-.coin:nth-child(5) { top: 40%; left: 10%; animation-duration: 13s; }
-.coin:nth-child(6) { top: 80%; left: 90%; animation-duration: 11s; }
