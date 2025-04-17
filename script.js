@@ -33,7 +33,7 @@ async function fetchCryptoData() {
 
     // Extra meme / telegram coins (hard to rank but needed)
     const extraCoinIds = [
-      'the-doge-nft', 'memecoin', 'nodecoin', 'tomarket', 'hamster-kombat', 'grass','alt','degen','major','goats','catizen','kadena','notcoin'
+      'the-doge-nft', 'memecoin', 'nodecoin', 'tomarket', 'hamster-kombat', 'grass','alt','degen','major','goats','catizen','kadena','notcoin','paws','silencio','avalon-coin','chirp'
     ];
 
     const extraRes = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${extraCoinIds.join(',')}`);
