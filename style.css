@@ -1,134 +1,124 @@
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f0f0f0;
-  color: #111;
-  transition: background-color 0.3s, color 0.3s;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
 }
 
 .dark-mode {
-  background-color: #121212;
-  color: #f9f9f9;
+    background-color: #121212;
+    color: white;
 }
 
-.header {
-  text-align: center;
-  padding: 1rem;
-  background: inherit;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+header {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
 }
 
-#typewriter {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+#typewriter-header {
+    font-size: 2.5rem;
+    animation: typewriter 4s steps(30) 1s 1 normal both;
 }
 
-.controls {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+@keyframes typewriter {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
 }
 
-input, button {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  border: none;
-  font-size: 1rem;
+.crypto-card {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 18rem;
+    margin: 10px;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.crypto-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
+
+.card-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.flip-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 10px;
+}
+
+#refreshButton {
+    margin-top: 20px;
+}
+
+#loadingSpinner {
+    margin-top: 10px;
 }
 
 #searchInput {
-  width: 200px;
+    width: 50%;
 }
 
-button:hover {
-  cursor: pointer;
-  opacity: 0.85;
+.dark-mode #searchInput {
+    background-color: #333;
+    color: white;
 }
 
-.crypto-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 2rem;
-  gap: 1.5rem;
+#search_result {
+    margin-top: 10px;
+    font-weight: bold;
 }
 
-.card {
-  width: 200px;
-  height: 260px;
-  perspective: 1000px;
-  transition: transform 0.5s ease;
-  animation: fadeInUp 0.6s ease-in-out;
+.price-up {
+    color: green;
 }
 
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.card:hover .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  backface-visibility: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-front {
-  background-color: #ffffff;
-}
-
-.card-back {
-  background-color: #f0f0f0;
-  transform: rotateY(180deg);
-}
-
-.dark-mode .card-front, .dark-mode .card-back {
-  background-color: #1e1e1e;
-  color: #fff;
-}
-
-.spinner {
-  display: none;
-  margin: 2rem auto;
-  border: 6px solid #ccc;
-  border-top: 6px solid #007bff;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.price-down {
+    color: red;
 }
